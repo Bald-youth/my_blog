@@ -1,15 +1,11 @@
 // containers/AppContainer.tsx
 import React from 'react';
-import Header from '../components/Header';
 import Routes from '../routes';
-
+import '../styles/AppContainer.css'
 const AppContainer: React.FC = () => {
   return (
-    <div>
-      <Header />
-      <main>
-        <Routes />
-      </main>
+    <div className='container'>
+      <Routes />
     </div>
   );
 };
