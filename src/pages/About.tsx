@@ -6,7 +6,7 @@ const About: React.FC = () => {
   return (
     <div>
       <h2>加入我们吧！！</h2>
-      <Footer />
+      
     </div>
   );
 };

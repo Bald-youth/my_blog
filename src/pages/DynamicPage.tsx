@@ -10,7 +10,7 @@ const DynamicPage: React.FC = () => {
     <div>
       <h2>Dynamic Page</h2>
       <p>Dynamic content for ID: {id}</p>
-      <Footer />
+     
     </div>
 
   );

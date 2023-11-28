@@ -7,7 +7,7 @@ const Home: React.FC = () => {
     <div>
       <h2>Welcome to My Blog!</h2>
       <p>This is the home page.</p>
-      <Footer />
+     
     </div>
   );
 };

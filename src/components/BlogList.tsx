@@ -1,39 +1,26 @@
-// components/BlogList.tsx
+// src/components/BlogList.tsx
 import React, { useEffect, useState } from 'react';
 
-interface BlogPost {
-  id: number;
-  title: string;
-  summary: string;
-  // 其他博客文章相关的字段
-}
-
 const BlogList: React.FC = () => {
+  interface BlogPost {
+    id: number;
+    title: string;
+    summary: string;
+    // Add other properties as needed
+  }
+
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
-    const fetchBlogPosts = async () => {
-      try {
-        const response = await fetch('/api/blog-posts');
-        if (response.ok) {
-          const data = await response.json();
-          setBlogPosts(data);
-        } else {
-          console.error('Failed to fetch blog posts');
-        }
-      } catch (error) {
-        console.error('Error during fetch:', error);
-      }
-    };
-
-    fetchBlogPosts();
+    // 当后端API就绪时，将在这里添加数据获取逻辑
+    // 暂时保留空的 useEffect
   }, []);
 
   return (
     <div>
       <h2>Blog Posts</h2>
       <ul>
-        {blogPosts.map((post) => (
+        {blogPosts.map((post: BlogPost) => (
           <li key={post.id}>
             <h3>{post.title}</h3>
             <p>{post.summary}</p>
