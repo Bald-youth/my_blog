@@ -9,8 +9,10 @@ const Navbar: React.FC = () => {
       <ul className="nav-list">
         <li><Link to="/">Home</Link></li>
         <li><Link to="/about">About</Link></li>
-        <li><Link to="/dynamic/1">Dynamic Page 1</Link></li>
-        <li><Link to="/dynamic/2">Dynamic Page 2</Link></li>
+        <li><Link to="/dynamic/1">Dynamic Page</Link></li>
+        {/* <li><Link to="/dynamic/2">Dynamic Page 2</Link></li> */}
+        <li><Link to="/login">Login</Link></li>
+
         {/* 添加其他页面链接 */}
       </ul>
     </nav>
