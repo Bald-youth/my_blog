@@ -1,5 +1,6 @@
 // src/components/BlogList.tsx
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const BlogList: React.FC = () => {
   interface BlogPost {
@@ -17,12 +18,15 @@ const BlogList: React.FC = () => {
   }, []);
 
   return (
-    <div>
+     <div>
       <h2>Blog Posts</h2>
       <ul>
-        {blogPosts.map((post: BlogPost) => (
+        {blogPosts.map((post) => (
           <li key={post.id}>
-            <h3>{post.title}</h3>
+            <h3>
+              {/* Add Link to the details page */}
+              <Link to={`/blog/${post.id}`}>{post.title}</Link>
+            </h3>
             <p>{post.summary}</p>
           </li>
         ))}

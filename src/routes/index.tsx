@@ -7,6 +7,7 @@ import About from '../pages/About';
 import DynamicPage from '../pages/DynamicPage';
 import Login from '../pages/Login'; // 导入登录页面组件
 import BlogList from '../components/BlogList';
+import BlogDetail from '../pages/BlogDetail';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => {
           <Route path="/dynamic/:id" element={<DynamicPage />} />
           <Route path="/login" element={<Login />} /> {/* 添加登录页面路由 */}
           <Route path='/blog' element={<BlogList />} />
+          <Route path='/blog/:id' element={<BlogDetail />} />
           {/* 添加其他页面路由 */}
         </Routes>
       </div>
