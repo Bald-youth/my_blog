@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // MongoDB 连接
-mongoose.connect('mongodb://localhost:27017/your_database_name', {
+mongoose.connect('mongodb://localhost:27017/my_blog_database', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 } as any);

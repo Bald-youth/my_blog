@@ -1,16 +1,20 @@
-// src/models/user.model.ts
-import mongoose, { Document, Schema } from 'mongoose';
+// user.model.ts
+import { Document, Schema, model } from 'mongoose';
 
-export interface UserDocument extends Document {
+// 定义用户接口
+export interface IUser extends Document {
   username: string;
   password: string;
+  // 其他用户相关的属性
 }
 
-const userSchema = new Schema({
+// 定义用户模型
+const UserSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  // 其他用户相关的属性
 });
 
-const User = mongoose.model<UserDocument>('User', userSchema);
+const UserModel = model<IUser>('User', UserSchema);
 
-export default User;
+export default UserModel;

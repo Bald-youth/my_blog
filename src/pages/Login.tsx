@@ -1,11 +1,13 @@
 // pages/Login.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css'
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+   const navigate = useNavigate(); // 使用 useNavigate 获取导航函数
 
   const handleLogin = async () => {
     // 假设这里有一个登录 API，你需要根据你的后端实现进行调整
@@ -33,6 +35,10 @@ const Login: React.FC = () => {
       setError('An unexpected error occurred');
     }
   };
+    const handleRegisterRedirect = () => {
+    // 点击注册按钮时跳转到注册页面
+    navigate('/register'); // 使用 navigate 进行页面跳转
+  };
     
     return (
       <div className="login-container">
@@ -58,6 +64,10 @@ const Login: React.FC = () => {
           </div>
           <button type="button" onClick={handleLogin}>
             Login
+          </button>
+          {/* 添加注册按钮的点击事件 */}
+          <button type="button" onClick={handleRegisterRedirect}>
+            Register
           </button>
         </form>
         {error && <p className="error-message">{error}</p>}
