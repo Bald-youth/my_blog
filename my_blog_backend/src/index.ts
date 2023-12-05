@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import authRoutes from './routes/auth.routes'
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -16,6 +17,9 @@ mongoose.connect('mongodb://localhost:27017/your_database_name', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 } as any);
+
+// 使用路由
+app.use('/auth',authRoutes);
 
 // 示例路由
 app.get('/', (req, res) => {
