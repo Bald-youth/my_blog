@@ -2,8 +2,8 @@
 import React from 'react';
 import Routes from '../routes';
 // import BlogList from '../components/BlogList';
-import LeftSidebar from '../components/LeftSidebar';
-import RightSidebar from '../components/RightSidebar';
+// import LeftSidebar from '../components/LeftSidebar';
+// import RightSidebar from '../components/RightSidebar';
 import SearchBox from '../components/SearchBox';
 
 import '../styles/AppContainer.css'
@@ -22,12 +22,12 @@ const AppContainer: React.FC = () => {
 
   return (
     <div className="container">
-      <LeftSidebar />
+      {/* <LeftSidebar /> */}
       <main>
         <SearchBox data={mockData} onSelect={handleSearchSelect} />
         <Routes />
       </main>
-      <RightSidebar />
+      {/* <RightSidebar /> */}
     </div>
   );
 };
