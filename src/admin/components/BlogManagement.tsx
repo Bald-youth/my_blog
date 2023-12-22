@@ -1,3 +1,5 @@
+// src\admin\components\BlogManagement.tsx
+
 import React from 'react';
 
 const BlogManagement: React.FC = () => {
