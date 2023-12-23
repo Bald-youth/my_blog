@@ -1,0 +1,51 @@
+/* src/admin/styles/CreateBlogPage.css */
+
+.container {
+  display: flex;
+  flex-direction: row; /* 将容器设置为水平方向排列 */
+  height: 100vh;
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  width: 50%;
+}
+
+.previewContainer {
+  width: 50%;
+  overflow-y: auto;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+}
+
+.previewContent {
+  line-height: 1.6;
+}
+
+/* 其他样式保持不变 */
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .formContainer {
+    width: 100%;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .previewContainer {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import BlogList from './BlogList';
-import CreateBlog from './CreateBlog';
+import CreateBlog from './CreateBlogPage';
 import EditBlog from './EditBlog';
+
 
 interface Post {
   _id: string;
@@ -14,6 +15,7 @@ interface Post {
 
 const BlogManagement: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -47,16 +49,29 @@ const BlogManagement: React.FC = () => {
     }
   };
 
-   return (
+  return (
     <div>
       <h2>Blog Management Component</h2>
-      <Link to="/admin/blog/create">Create New Post</Link>
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <button onClick={() => navigate('/admin/blog/create')}>Create New Post</button>
+        <button onClick={() => navigate('/admin/blog/edit/:id')}>Edit Post</button>
+        <button onClick={() => navigate('/admin/blog')}>View Posts</button>
+      </div>
 
       {/* 使用 Route 来匹配子路由 */}
       <Routes>
-        <Route path="blog/*" element={<BlogList posts={posts} onDelete={handleDeletePost} />} />
+        <Route
+          path="blog/*"
+          element={<BlogList posts={posts} onDelete={handleDeletePost} />}
+        />
         <Route path="create" element={<CreateBlog onPostCreated={handlePostCreated} />} />
         <Route path="edit/:id" element={<EditBlog onPostUpdated={handlePostUpdated} />} />
+
+        {/* 默认重定向到 "blog"，或根据需要重定向到其他路径 */}
+        <Route
+          path="/"
+          element={<Navigate to="/admin/blog" replace />}
+        />
       </Routes>
     </div>
   );
