@@ -41,8 +41,8 @@ const AdminDashboard: React.FC = () => {
         <Content>
           <Routes>
             <Route path="user" element={<UserManagement />} />
-            <Route path="blog" element={<BlogManagement />} />
-            <Route path="*" element={<Navigate to="user" />} />
+            <Route path="blog/*" element={<BlogManagement />} />
+            <Route path="/" element={<Navigate to="user" />} />
           </Routes>
         </Content>
       </Layout>

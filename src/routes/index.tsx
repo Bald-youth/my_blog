@@ -10,27 +10,27 @@ import BlogList from '../components/BlogList';
 import BlogDetail from '../pages/BlogDetail';
 import Register from '../pages/Register';
 import AdminDashboard from '../admin/components/AdminDashboard';
-
 const AppRoutes: React.FC = () => {
   return (
     <Router>
       <div>
         <Header />
         <Routes>
-          <Route path="*">
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="dynamic/:id" element={<DynamicPage />} />
-            <Route path="login" element={<Login />} />
-            <Route path="blog" element={<BlogList />} />
-            <Route path="register" element={<Register />} />
-            <Route path="blog/:id" element={<BlogDetail />} />
-            <Route path="admin/*" element={<AdminDashboard />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="dynamic/:id" element={<DynamicPage />} />
+          <Route path="login" element={<Login />} />
+          <Route path="blog" element={<BlogList />} />
+          <Route path="register" element={<Register />} />
+          <Route path="blog/:id" element={<BlogDetail />} />
+          <Route path="admin/*" element={<AdminDashboard />} />
         </Routes>
       </div>
     </Router>
   );
 };
+
+
+
 
 export default AppRoutes;
