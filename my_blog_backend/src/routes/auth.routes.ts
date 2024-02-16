@@ -1,39 +1,38 @@
-// src/routes/auth.routes.ts
-import express, { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+// auth.routes.ts
+import express from 'express';
 import UserModel, { IUser } from '../models/user.model';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-// 用户登录路由
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/auth/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
 
-    // 查找用户
-    const user: IUser | null = await UserModel.findOne({ username });
-
-    // 如果找不到用户，返回错误
-    if (!user) {
-      return res.status(401).json({ error: 'Invalid username or password' });
+    // 检查用户名是否已存在
+    const existingUser: IUser | null = await UserModel.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists' });
     }
 
-    // 验证密码
-    const isValidPassword: boolean = await bcrypt.compare(password, user.password);
+    // 对密码进行哈希
+    const hashedPassword: string = await bcrypt.hash(password, 10);
 
-    // 如果密码不匹配，返回错误
-    if (!isValidPassword) {
-      return res.status(401).json({ error: 'Invalid username or password' });
-    }
+    // 创建新用户
+    const newUser: IUser = new UserModel({
+      username,
+      password: hashedPassword,
+      email,
+    });
 
-    // 生成 JWT
-    const token: string = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
+    // 保存用户到数据库
+    await newUser.save();
 
-    // 返回成功响应，包含生成的 JWT
-    res.json({ token });
-  } catch (error:any) {
-    res.status(500).json({ error: error.message });
+    // 返回成功消息
+    res.status(201).json({ message: '注册成功！！' });
+  } catch (error) {
+    console.error('注册时出现错误:', error);
+    res.status(500).json({ message: '发生了一个意外的错误！！' });
   }
 });
 

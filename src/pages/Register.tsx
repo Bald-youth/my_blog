@@ -12,7 +12,7 @@ const Register: React.FC = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('/api/register', {
+      const response = await fetch('/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,16 +22,16 @@ const Register: React.FC = () => {
 
       if (response.ok) {
         // 注册成功，可以执行相应的操作，比如重定向到登录页面
-        console.log('Registration successful');
+        console.log('注册成功！！');
         navigate('/login'); // 假设有一个登录页面
       } else {
         // 处理注册失败的情况，可能需要显示错误信息
         const data = await response.json();
-        setError(data.message || 'Registration failed');
+        setError(data.message || '注册失败！！');
       }
     } catch (error) {
-      console.error('Error during registration:', error);
-      setError('An unexpected error occurred');
+      console.error('注册时错误:', error);
+      setError('前端->发生了一个意外的错误！！');
     }
   };
 
