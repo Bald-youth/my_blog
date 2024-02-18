@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect('mongodb://127.0.0.1:27017/blog_database/', {} as any);
+mongoose.connect('mongodb://127.0.0.1:27017/blog_database', {} as any);
 
-app.use('/auth', authRoutes);
+app.use('/auth', authRoutes);  // 将路由添加到/auth前缀下
 
 app.get('/', (req, res) => {
   res.send('Hello, this is your backend!');

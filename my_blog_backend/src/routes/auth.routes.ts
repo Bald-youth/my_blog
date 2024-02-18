@@ -5,9 +5,10 @@ import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-router.post('/auth/register', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
     const { username, password, email } = req.body;
+    console.log("注册测试"+username,password,email);
 
     // 检查用户名是否已存在
     const existingUser: IUser | null = await UserModel.findOne({ username });

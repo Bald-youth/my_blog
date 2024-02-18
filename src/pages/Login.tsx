@@ -12,7 +12,7 @@ const Login: React.FC = () => {
   const handleLogin = async () => {
     // 假设这里有一个登录 API，你需要根据你的后端实现进行调整
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
