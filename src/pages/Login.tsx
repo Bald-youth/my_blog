@@ -28,11 +28,11 @@ const Login: React.FC = () => {
       } else {
         // 处理登录失败的情况，可能需要显示错误信息
         const data = await response.json();
-        setError(data.message || 'Login failed');
+        setError(data.message || '登录失败！！');
       }
     } catch (error) {
-      console.error('Error during login:', error);
-      setError('An unexpected error occurred');
+      console.error('登录时出现错误:', error);
+      setError('发生了一个意料之外的错误！！');
     }
   };
     const handleRegisterRedirect = () => {
@@ -42,10 +42,10 @@ const Login: React.FC = () => {
     
     return (
       <div className="login-container">
-        <h2>Login Page</h2>
+        <h2>登录页面</h2>
         <form className="login-form">
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="username">用户名称:</label>
             <input
               type="text"
               id="username"
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">用户密码:</label>
             <input
               type="password"
               id="password"
@@ -63,11 +63,12 @@ const Login: React.FC = () => {
             />
           </div>
           <button type="button" onClick={handleLogin}>
-            Login
+            点击登录
           </button>
           {/* 添加注册按钮的点击事件 */}
+          <br/>
           <button type="button" onClick={handleRegisterRedirect}>
-            Register
+            跳转注册
           </button>
         </form>
         {error && <p className="error-message">{error}</p>}

@@ -5,6 +5,7 @@ import { Document, Schema, model } from 'mongoose';
 export interface IUser extends Document {
   username: string;
   password: string;
+  email: string;
   // 其他用户相关的属性
 }
 
@@ -12,6 +13,7 @@ export interface IUser extends Document {
 const UserSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  email: {type:String, required: true},
   // 其他用户相关的属性
 });
 

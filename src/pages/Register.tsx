@@ -31,7 +31,7 @@ const Register: React.FC = () => {
       }
     } catch (error) {
       console.error('注册时错误:', error);
-      setError('前端->发生了一个意外的错误！！');
+      setError('发生了一个意料之外的错误！！');
     }
   };
 
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
 
   return (
     <div className="register-container">
-      <h2>Register Page</h2>
+      <h2>注册页面</h2>
       <form className="register-form">
         <div className="form-group">
           <label htmlFor="username">Username:</label>
@@ -72,11 +72,12 @@ const Register: React.FC = () => {
           />
         </div>
         <button type="button" onClick={handleRegister}>
-          Register
+          点击注册
         </button>
+        <br/>
         {/* 添加注册按钮的点击事件 */}
           <button type="button" onClick={handleLoginRedirect}>
-             Login Page
+             跳转登录
              
           </button>
       </form>
