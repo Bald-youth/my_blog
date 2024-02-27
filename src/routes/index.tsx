@@ -10,6 +10,7 @@ import BlogList from '../components/BlogList';
 import BlogDetail from '../pages/BlogDetail';
 import Register from '../pages/Register';
 import AdminDashboard from '../admin/components/AdminDashboard';
+import UserDashboard from '../user/components/UserDashboard';
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -24,6 +25,8 @@ const AppRoutes: React.FC = () => {
           <Route path="register" element={<Register />} />
           <Route path="blog/:id" element={<BlogDetail />} />
           <Route path="admin/*" element={<AdminDashboard />} />
+          <Route path="user/*" element={<UserDashboard />} />
+
         </Routes>
       </div>
     </Router>
