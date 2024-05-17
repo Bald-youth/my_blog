@@ -1,3 +1,4 @@
+// my_blog/src/pages/Login.tsx 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
@@ -6,7 +7,7 @@ const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate(); // 使用 useNavigate 获取导航函数
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -22,23 +23,22 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         if (data.token) {
-          localStorage.setItem('authToken', data.token); // 存储token
-          navigate('/user/dashboard'); // 登录成功后跳转
-          console.log('Login successful');
+          localStorage.setItem('authToken', data.token);
+          navigate('/user/dashboard'); // 登录成功后跳转到仪表盘
         } else {
-          setError('未能获取到身份验证令牌！');
+          setError('未能获取到身份验证令牌');
         }
       } else {
-        setError(data.message || '登录失败！！');
+        setError(data.message || '登录失败');
       }
     } catch (error) {
       console.error('登录时出现错误:', error);
-      setError('发生了一个意料之外的错误！！');
+      setError('发生了一个意料之外的错误');
     }
   };
 
   const handleRegisterRedirect = () => {
-    navigate('/register'); // 使用 navigate 进行页面跳转
+    navigate('/register');
   };
 
   return (
@@ -77,4 +77,3 @@ const Login: React.FC = () => {
 };
 
 export default Login;
-

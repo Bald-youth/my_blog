@@ -1,4 +1,4 @@
-// components/PrivateRoute.tsx
+// My_web/my_blog/src/components/PrivateRoute.tsx 
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth'; // 假设你有一个useAuth钩子来检查用户是否已登录

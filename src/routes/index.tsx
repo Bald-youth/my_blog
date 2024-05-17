@@ -1,4 +1,4 @@
-// src/routes/index.tsx
+// My_web/my_blog/src/routes/index.tsx 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from '../components/Header';

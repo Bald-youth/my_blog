@@ -1,31 +1,37 @@
 // src/user/components/UserDashboard.tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
-import {UserOutlined, BookFilled,} from '@ant-design/icons';
+import { UserOutlined, BookFilled } from '@ant-design/icons';
 import UserInfo from './UserInfo';
-
-
 
 const { Sider, Content } = Layout;
 
 const UserDashboard: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleMenuClick = (key: string) => {
-        switch(key) {
-            case 'info':
-                navigate('/user/info');
-                break;
-            case 'blog':
-                navigate('/user/blog');
-                break;
-            default:
-                break;
-        }
+  useEffect(() => {
+    // 检查是否有有效的身份验证令牌
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
-    };
-    return (
+  const handleMenuClick = (key: string) => {
+    switch (key) {
+      case 'info':
+        navigate('/user/info');
+        break;
+      case 'blog':
+        navigate('/user/blog');
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider width={80} theme="dark">
         <Menu mode="vertical" theme="dark" style={{ height: '100%', borderRight: 0 }}>
@@ -48,6 +54,6 @@ const UserDashboard: React.FC = () => {
       </Layout>
     </Layout>
   );
-}
+};
 
 export default UserDashboard;
