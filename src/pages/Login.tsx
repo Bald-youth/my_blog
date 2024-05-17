@@ -21,6 +21,7 @@ const Login: React.FC = () => {
       });
 
       if (response.ok) {
+        navigate('/user/dashboard')
         // 登录成功，执行相应的操作，比如重定向到受保护的页面
         // 可以使用路由库（如 react-router-dom）提供的 useHistory hook
         console.log('Login successful');

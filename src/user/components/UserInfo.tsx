@@ -1,6 +1,6 @@
 
 const UserInfo:React.FC = () => {
     
-    return("Hello UserInfo")
+     return <div>Hello UserInfo</div>
 }
 export default UserInfo;

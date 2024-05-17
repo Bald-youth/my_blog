@@ -8,10 +8,10 @@ const Navbar: React.FC = () => {
     <nav className="navbar">
       <ul className="nav-list">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/dynamic/1">Dynamic Page</Link></li>
+        <li><Link to="about">About</Link></li>
+        <li><Link to="dynamic/1">Dynamic Page</Link></li>
         {/* <li><Link to="/dynamic/2">Dynamic Page 2</Link></li> */}
-        <li><Link to="/login">Login</Link></li>
+        <li><Link to="login">Login</Link></li>
         <li><Link to="admin">Admin Page</Link></li> 
         {/* admin开发完成后，需要添加到login页面中去，不然安全性问题很大 */}
 

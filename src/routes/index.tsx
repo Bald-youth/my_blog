@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Home from '../pages/Home';
 import About from '../pages/About';
 import DynamicPage from '../pages/DynamicPage';
+import PrivateRoute from '../components/PrivateRoute';
 import Login from '../pages/Login';
 import BlogList from '../components/BlogList';
 import BlogDetail from '../pages/BlogDetail';
@@ -25,7 +26,11 @@ const AppRoutes: React.FC = () => {
           <Route path="register" element={<Register />} />
           <Route path="blog/:id" element={<BlogDetail />} />
           <Route path="admin/*" element={<AdminDashboard />} />
-          <Route path="user/*" element={<UserDashboard />} />
+          {/* <Route path="user/*" element={<UserDashboard />} /> */}
+          <Route element={<PrivateRoute/>}>
+            {/* <Route path="admin/*" element={<AdminDashboard />} /> */}
+            <Route path="user/*" element={<UserDashboard />} />
+          </Route>
 
         </Routes>
       </div>
