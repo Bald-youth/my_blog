@@ -1,4 +1,4 @@
-// my_blog/src/pages/Login.tsx 
+// My_web/my_blog/src/pages/Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
@@ -24,6 +24,7 @@ const Login: React.FC = () => {
       if (response.ok) {
         if (data.token) {
           localStorage.setItem('authToken', data.token);
+          console.log('登录成功，身份验证令牌:', data.token);
           navigate('/user/dashboard'); // 登录成功后跳转到仪表盘
         } else {
           setError('未能获取到身份验证令牌');

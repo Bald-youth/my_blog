@@ -55,7 +55,7 @@ router.post('/login', async (req, res) => {
     });
 
     return res.status(200).json({ message: '登录成功', token });
-  } catch (error: any) { // 显式指定 error 的类型为 any
+  } catch (error: string | any) { // 显式指定 error 的类型为 any
     console.error('登录时出现错误:', error);
     res.status(500).json({ message: '发生了一个意外的错误' });
   }
