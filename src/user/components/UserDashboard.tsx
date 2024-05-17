@@ -1,17 +1,21 @@
-// src/user/components/UserDashboard.tsx
 import React, { useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { UserOutlined, BookFilled } from '@ant-design/icons';
 import UserInfo from './UserInfo';
+import UserBlog from './BlogInfo';
 
 const { Sider, Content } = Layout;
+
+const menuItems = [
+  { key: 'info', title: '用户信息', icon: <UserOutlined /> },
+  { key: 'blog', title: '我的博客', icon: <BookFilled /> }
+];
 
 const UserDashboard: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 检查是否有有效的身份验证令牌
     const token = localStorage.getItem('authToken');
     if (!token) {
       navigate('/login');
@@ -19,35 +23,25 @@ const UserDashboard: React.FC = () => {
   }, [navigate]);
 
   const handleMenuClick = (key: string) => {
-    switch (key) {
-      case 'info':
-        navigate('/user/info');
-        break;
-      case 'blog':
-        navigate('/user/blog');
-        break;
-      default:
-        break;
-    }
+    navigate(`/user/${key}`);
   };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider width={80} theme="dark">
         <Menu mode="vertical" theme="dark" style={{ height: '100%', borderRight: 0 }}>
-          <Menu.Item key="info" icon={<UserOutlined />} onClick={() => handleMenuClick('info')}>
-            用户信息
-          </Menu.Item>
-          <Menu.Item key="blog" icon={<BookFilled />} onClick={() => handleMenuClick('blog')}>
-            我的博客
-          </Menu.Item>
+          {menuItems.map(item => (
+            <Menu.Item key={item.key} icon={item.icon} onClick={() => handleMenuClick(item.key)}>
+              {item.title}
+            </Menu.Item>
+          ))}
         </Menu>
       </Sider>
       <Layout>
         <Content>
           <Routes>
             <Route path="info" element={<UserInfo />} />
-            <Route path="blog/*" element={<UserInfo />} />
+            <Route path="blog" element={<UserBlog />} />
             <Route path="/" element={<Navigate to="info" />} />
           </Routes>
         </Content>
