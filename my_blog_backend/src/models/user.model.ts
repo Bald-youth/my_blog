@@ -13,10 +13,10 @@ export interface IUser extends Document {
 const UserSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  email: {type:String, required: true},
-  // 其他用户相关的属性
+  email: { type: String, required: true },
+  // 其他用户相关的属性可以继续添加
 });
 
+// 导出用户模型
 const UserModel = model<IUser>('User', UserSchema);
-
 export default UserModel;
