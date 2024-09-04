@@ -1,3 +1,4 @@
+//my_blog/src/user/components/BlogInfo.tsx
 import React from "react";
 
 

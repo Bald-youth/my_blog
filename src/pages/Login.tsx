@@ -20,12 +20,32 @@ const Login: React.FC = () => {
       });
 
       const data = await response.json();
+      console.log('后端返回的数据:', data);
 
-      if (response.ok) {
+   if (response.ok) {
         if (data.token) {
-          localStorage.setItem('authToken', data.token);
-          console.log('登录成功，身份验证令牌:', data.token);
-          navigate('/user/dashboard'); // 登录成功后跳转到仪表盘
+          // 解析 JWT 获取 userId
+          const base64Url = data.token.split('.')[1];
+          const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          const jsonPayload = decodeURIComponent(
+            atob(base64)
+              .split('')
+              .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+              .join('')
+          );
+
+          const { userId } = JSON.parse(jsonPayload);
+
+          if (userId) {
+            // 保存用户ID和token
+            localStorage.setItem('authToken', data.token);
+            localStorage.setItem('userId', userId);
+            console.log('登录成功，身份验证令牌:', data.token);
+            console.log('保存的用户ID:', userId);
+            navigate('/user/dashboard'); // 登录成功后跳转到仪表盘
+          } else {
+            setError('无法从 token 中提取用户 ID');
+          }
         } else {
           setError('未能获取到身份验证令牌');
         }

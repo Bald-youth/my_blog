@@ -14,7 +14,7 @@ const JWT_SECRET = process.env.JWT_SECRET as string;
 declare global {
   namespace Express {
     interface Request {
-      user?: IUser; // 根据实际情况定义用户对象的类型
+      user?: IUser;
     }
   }
 }
@@ -32,7 +32,6 @@ const authenticateUser = async (req: Request, res: Response, next: express.NextF
     if (!user) {
       return res.status(401).json({ message: '无效的身份验证令牌' });
     }
-    // 将用户对象添加到请求中，以便后续路由可以使用
     req.user = user;
     next();
   } catch (error: any) {
@@ -40,8 +39,14 @@ const authenticateUser = async (req: Request, res: Response, next: express.NextF
   }
 };
 
+// 密码复杂度检查函数
+const isPasswordStrong = (password: string): boolean => {
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  return passwordRegex.test(password);
+};
+
 // 登录路由
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: Request, res: Response) => {
   try {
     const { username, password } = req.body;
     const user = await UserModel.findOne({ username });
@@ -54,34 +59,37 @@ router.post('/login', async (req, res) => {
       expiresIn: '0.5h',
     });
 
-    return res.status(200).json({ message: '登录成功', token });
+    
+
+    return res.status(200).json({ message: '登录成功', token ,userId: user._id});
   } catch (error: any) {
     console.error('登录时出现错误:', error);
-    return res.status(500).json({ message: '发生了一个意外的错误' });
+    return res.status(500).json({ message: '服务器错误，请稍后重试' });
   }
 });
 
 // 注册路由
-router.post('/register', async (req, res) => {
+router.post('/register', async (req: Request, res: Response) => {
   try {
     const { username, password, email } = req.body;
 
-    // 检查用户名和邮箱是否已经存在
-    const existingUser = await UserModel.findOne({ $or: [{ username }, { email }] });
-    if (existingUser) {
-      if (existingUser.username === username) {
-        return res.status(400).json({ message: '用户名已存在' });
-      } else {
-        return res.status(400).json({ message: '邮箱已存在' });
-      }
+    if (!isPasswordStrong(password)) {
+      return res.status(400).json({
+        message: '密码必须包含至少8个字符，其中包括大写字母、小写字母、数字和特殊字符',
+      });
     }
 
-    // 创建新用户
+    const existingUser = await UserModel.findOne({ $or: [{ username }, { email }] });
+    if (existingUser) {
+      return res.status(400).json({
+        message: existingUser.username === username ? '用户名已存在' : '邮箱已存在',
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new UserModel({ username, password: hashedPassword, email });
     await newUser.save();
 
-    // 生成JWT
     const token = jwt.sign({ userId: newUser._id, username: newUser.username }, JWT_SECRET, {
       expiresIn: '1h',
     });
@@ -89,8 +97,9 @@ router.post('/register', async (req, res) => {
     return res.status(201).json({ message: '注册成功', token });
   } catch (error: any) {
     console.error('注册时出现错误:', error);
-    return res.status(500).json({ message: '发生了一个意外的错误' });
+    return res.status(500).json({ message: '服务器错误，请稍后重试' });
   }
 });
 
 export default router;
+
